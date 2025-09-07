@@ -1,3 +1,4 @@
+import React from "react";
 import VisuallyHiddenStyling from "./VisuallyHiddenStyling";
 import Ring from "./RingIcon";
 import Circle from "./CircleIcon";
@@ -21,41 +22,102 @@ function List({ todos, setTodos }) {
 export default List;
 
 function ListItem({ item, setTodos }) {
+  const [edit, setEdit] = React.useState(false);
+
+  const inputRef = React.useRef(null);
+
   const competeTodo = () => {
     setTodos((prev) =>
       prev.map((todo) =>
         todo.id === item.id
-          ? {...todo, is_completed: !todo.is_completed}
+          ? { ...todo, is_completed: !todo.is_completed }
           : todo
       )
     );
   };
+
+  const handleEdit = () => {
+    setEdit(true);
+  };
+
+  React.useEffect(() => {
+    if (edit && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(
+        inputRef.current.value.length,
+        inputRef.current.value.length
+      );
+    }
+  }, [edit]);
+
+  const handleChange = (e) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === item.id ? { ...todo, title: e.target.value } : todo
+      )
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEdit(false);
+  };
+
+  const handleBlur = () => {
+    setEdit(false);
+  };
+
   return (
     <li
-      id={item?.id} onClick={competeTodo}
+      id={item?.id}
       className="flex justify-between items-center h-[70px] w-full max-w-md 
         border border-PaleForest text-base  text-PaleForest p-3 rounded-[14px]"
     >
-      <button
-        className="flex items-center self-start bg-transparent border-none text-PaleForest gap-2 text-base h-[50px] w-full text-start"
-      >
-        {item?.is_completed ? <Circle /> : <Ring />}
-        <p style={item.is_completed ? {textDecoration: "line-through"} : {}}>
+      { edit ? (
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="edit-todo">
+            <input
+              className="flex justify-between items-center h-[100%-12px] w-full max-w-md  border-transparent text-base  text-PaleForest p-3 rounded-[14px] outline-transparent"
+              ref={inputRef}
+              type="text"
+              name="edit-todo"
+              id="edit-todo"
+              defaultValue={item?.title}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </label>
+        </form>
+      ) : (
+      <>
+        <button
+          onClick={competeTodo}
+          className="flex items-center self-start bg-transparent border-none h-[50px] w-auto "
+        >
+          {item?.is_completed ? <Circle /> : <Ring />}
+        </button>
+        <p
+          className="flex items-center self-start text-PaleForest text-base w-full bg-transparent mt-2.5"
+          style={item.is_completed ? { textDecoration: "line-through" } : {}}
+        >
           {item?.title}
         </p>
-      </button>
-      <div className="flex items-end gap-1">
-        <button
-          className="bg-transparent text-PaleForest border-none"
-        >
-          <VisuallyHiddenStyling text="Edit" />
-          <Edit />
-        </button>
-        <button className="bg-transparent text-PaleForest border-none">
-          <VisuallyHiddenStyling text="Delete" />
-          <Bin />
-        </button>
-      </div>
+
+        <div className="flex items-end gap-1">
+          <button
+            onClick={handleEdit}
+            className="bg-transparent text-PaleForest border-none"
+          >
+            <VisuallyHiddenStyling text="Edit" />
+            <Edit />
+          </button>
+          <button className="bg-transparent text-PaleForest border-none">
+            <VisuallyHiddenStyling text="Delete" />
+            <Bin />
+          </button>
+        </div>
+      </>
+      )}
     </li>
   );
 }

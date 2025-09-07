@@ -1,10 +1,16 @@
 import VisuallyHiddenStyling from "./VisuallyHiddenStyling";
+import Ring from "./RingIcon";
+import Circle from "./CircleIcon";
+import Bin from "./BinIcon";
+import Edit from "./EditIcon";
 
-function List({ todos }) {
+function List({ todos, setTodos }) {
   return (
     <ol className="flex flex-col self-center items-center w-97/100 max-w-md mt-[27px] mb-[27px] gap-[27px]">
       {todos && todos.length > 0 ? (
-        todos?.map((item, index) => <ListItem key={index} item={item} />)
+        todos?.map((item, index) => (
+          <ListItem key={index} item={item} setTodos={setTodos} />
+        ))
       ) : (
         <p>Let's add a task</p>
       )}
@@ -14,31 +20,40 @@ function List({ todos }) {
 
 export default List;
 
-function ListItem({ item }) {
+function ListItem({ item, setTodos }) {
+  const competeTodo = () => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === item.id
+          ? {...todo, is_completed: !todo.is_completed}
+          : todo
+      )
+    );
+  };
   return (
     <li
-      id={item?.id}
+      id={item?.id} onClick={competeTodo}
       className="flex justify-between items-center h-[70px] w-full max-w-md 
-        border border-solid border-PastelPurple text-base bg-Mute text-PaleForest p-3"
+        border border-PaleForest text-base  text-PaleForest p-3 rounded-[14px]"
     >
-      <button className="flex items-center bg-transparent border-none text-PaleForest gap-3 text-base">
-        <svg>
-          <circle cx="12" cy="12" r="10" fillRule="nonzero" />
-        </svg>
-        <p>{item?.title}</p>
+      <button
+        className="flex items-center self-start bg-transparent border-none text-PaleForest gap-2 text-base h-[50px] w-full text-start"
+      >
+        {item?.is_completed ? <Circle /> : <Ring />}
+        <p style={item.is_completed ? {textDecoration: "line-through"} : {}}>
+          {item?.title}
+        </p>
       </button>
-      <div className="flex items-center gap-1">
-        <button className="bg-transparent text-PaleForest border-none">
+      <div className="flex items-end gap-1">
+        <button
+          className="bg-transparent text-PaleForest border-none"
+        >
           <VisuallyHiddenStyling text="Edit" />
-          <svg className="fill-PaleForest">
-            <path d="" />
-          </svg>
+          <Edit />
         </button>
         <button className="bg-transparent text-PaleForest border-none">
           <VisuallyHiddenStyling text="Delete" />
-          <svg className="fill-PaleForest">
-            <path d="" />
-          </svg>
+          <Bin />
         </button>
       </div>
     </li>

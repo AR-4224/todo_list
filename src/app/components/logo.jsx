@@ -2,7 +2,7 @@ export default function Logo({fillColor}){
     return(
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-[120px] h-[120px]"
+            className="w-[100px] h-[100px]"
             fill={fillColor}
             viewBox="0 0 1200 1600"
         >

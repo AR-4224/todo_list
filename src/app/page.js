@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import Form from './components/Form';
 import Header from './components/Header';
@@ -5,12 +6,15 @@ import Hero from './components/Hero';
 import List from './components/List';
 
 function Home() {
+  const [todos, setTodos] = React.useState([]);
+  const todosCompleted = todos.filter((todo) => todo.is_completed === true).length;
+  const todosTotal = todos.length;
   return (
-    <div>
+    <div className="flex flex-col w-[70%] max-[510px]:w-full">
       <Header />
-      <Hero completed={0} total={0} />
-      <Form />
-      <List todos={[]}/>
+      <Hero completed={todosCompleted} total={todosTotal} />
+      <Form setTodos={setTodos}/>
+      <List todos={todos} setTodos={setTodos}/>
     </div>
   );
 }

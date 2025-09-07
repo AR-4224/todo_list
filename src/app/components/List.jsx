@@ -36,6 +36,9 @@ function ListItem({ item, setTodos }) {
     );
   };
 
+  const handleDelete = () => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== item.id));
+  }
   const handleEdit = () => {
     setEdit(true);
   };
@@ -111,7 +114,10 @@ function ListItem({ item, setTodos }) {
             <VisuallyHiddenStyling text="Edit" />
             <Edit />
           </button>
-          <button className="bg-transparent text-PaleForest border-none">
+          <button
+            onClick={handleDelete} 
+            className="bg-transparent text-PaleForest border-none"
+          >
             <VisuallyHiddenStyling text="Delete" />
             <Bin />
           </button>

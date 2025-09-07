@@ -1,5 +1,4 @@
 import React from "react";
-import VisuallyHiddenStyling from "./VisuallyHiddenStyling";
 import Ring from "./RingIcon";
 import Circle from "./CircleIcon";
 import Bin from "./BinIcon";
@@ -111,14 +110,14 @@ function ListItem({ item, setTodos }) {
             onClick={handleEdit}
             className="bg-transparent text-PaleForest border-none"
           >
-            <VisuallyHiddenStyling text="Edit" />
+            
             <Edit />
           </button>
           <button
             onClick={handleDelete} 
             className="bg-transparent text-PaleForest border-none"
           >
-            <VisuallyHiddenStyling text="Delete" />
+            
             <Bin />
           </button>
         </div>

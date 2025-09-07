@@ -13,7 +13,7 @@ function Home() {
     <div className="flex flex-col w-[70%] max-[510px]:w-full">
       <Header />
       <Hero completed={todosCompleted} total={todosTotal} />
-      <Form setTodos={setTodos}/>
+      <Form todos={todos} setTodos={setTodos}/>
       <List todos={todos} setTodos={setTodos}/>
     </div>
   );

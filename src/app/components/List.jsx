@@ -37,8 +37,8 @@ function ListItem({ item, setTodos }) {
 
   const handleDelete = () => {
     setTodos((prev) => prev.filter((todo) => todo.id !== item.id));
-  }
-  
+  };
+
   const handleEdit = () => {
     setEdit(true);
   };
@@ -76,7 +76,7 @@ function ListItem({ item, setTodos }) {
       className="flex justify-between items-center h-[70px] w-full max-w-md 
         border border-PaleForest text-base  text-PaleForest p-3 rounded-[14px]"
     >
-      { edit ? (
+      {edit ? (
         <form onSubmit={handleSubmit}>
           <label htmlFor="edit-todo">
             <input
@@ -92,37 +92,35 @@ function ListItem({ item, setTodos }) {
           </label>
         </form>
       ) : (
-      <>
-        <button
-          onClick={competeTodo}
-          className="flex items-center self-start bg-transparent border-none h-[50px] w-auto "
-        >
-          {item?.is_completed ? <Circle /> : <Ring />}
-        </button>
-        <p
-          className="flex items-center self-start text-PaleForest text-base w-full bg-transparent mt-2.5"
-          style={item.is_completed ? { textDecoration: "line-through" } : {}}
-        >
-          {item?.title}
-        </p>
+        <>
+          <button
+            onClick={competeTodo}
+            className="flex items-center self-start bg-transparent border-none h-[50px] w-auto "
+          >
+            {item?.is_completed ? <Circle /> : <Ring />}
+          </button>
+          <p
+            className="flex items-center self-start text-PaleForest text-base w-full bg-transparent mt-2.5"
+            style={item.is_completed ? { textDecoration: "line-through" } : {}}
+          >
+            {item?.title}
+          </p>
 
-        <div className="flex items-end gap-1">
-          <button
-            onClick={handleEdit}
-            className="bg-transparent text-PaleForest border-none"
-          >
-            
-            <Edit />
-          </button>
-          <button
-            onClick={handleDelete} 
-            className="bg-transparent text-PaleForest border-none"
-          >
-            
-            <Bin />
-          </button>
-        </div>
-      </>
+          <div className="flex items-end gap-1">
+            <button
+              onClick={handleEdit}
+              className="bg-transparent text-PaleForest border-none"
+            >
+              <Edit />
+            </button>
+            <button
+              onClick={handleDelete}
+              className="bg-transparent text-PaleForest border-none"
+            >
+              <Bin />
+            </button>
+          </div>
+        </>
       )}
     </li>
   );

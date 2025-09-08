@@ -1,9 +1,9 @@
 "use client";
-import React from 'react';
-import Form from './components/Form';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import List from './components/List';
+import React from "react";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import List from "./components/List";
 
 function Home() {
   const [todos, setTodos] = React.useState([]);
@@ -19,7 +19,9 @@ function Home() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const todosCompleted = todos.filter((todo) => todo.is_completed === true).length;
+  const todosCompleted = todos.filter(
+    (todo) => todo.is_completed === true
+  ).length;
 
   const todosTotal = todos.length;
 
@@ -27,8 +29,8 @@ function Home() {
     <div className="flex flex-col w-[70%] max-[510px]:w-full">
       <Header />
       <Hero completed={todosCompleted} total={todosTotal} />
-      <Form setTodos={setTodos}/>
-      <List todos={todos} setTodos={setTodos}/>
+      <Form setTodos={setTodos} />
+      <List todos={todos} setTodos={setTodos} />
     </div>
   );
 }

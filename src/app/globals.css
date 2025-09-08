@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-    --color-Groove: #802BB1;
-    --color-PastelPurple: #564F6F;
-    --color-Mute: #4C495D;
-    --color-PaleForest: #D1D7E0;
-    --color-DeepForest: #2d283e;
-    --color-Haiti: #1B0F2B;
+  --color-Groove: #802bb1;
+  --color-PastelPurple: #564f6f;
+  --color-Mute: #4c495d;
+  --color-PaleForest: #d1d7e0;
+  --color-DeepForest: #2d283e;
+  --color-Haiti: #1b0f2b;
 }
 
 *,
 *::after,
 *::before {
-    font-family: inherit;
-    box-sizing: border-box;
+  font-family: inherit;
+  box-sizing: border-box;
 }
-
 
 body {
   font-family: Helvetica;

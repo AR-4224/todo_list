@@ -13,9 +13,8 @@ function Form({ setTodos }) {
       is_completed: false,
     };
 
-    setTodos(prev => [...prev, newTodo]);
+    setTodos((prev) => [...prev, newTodo]);
     event.target.reset();
-    
   }
   return (
     <form
@@ -32,7 +31,6 @@ function Form({ setTodos }) {
         />
       </label>
       <button className="bg-PastelPurple text-PaleForest w-[12%] h-[50px] rounded-[11px] border-none">
-        
         <Plus />
       </button>
     </form>

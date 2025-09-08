@@ -38,6 +38,7 @@ function ListItem({ item, setTodos }) {
   const handleDelete = () => {
     setTodos((prev) => prev.filter((todo) => todo.id !== item.id));
   }
+  
   const handleEdit = () => {
     setEdit(true);
   };

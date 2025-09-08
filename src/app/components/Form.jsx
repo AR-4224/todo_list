@@ -1,10 +1,11 @@
 import Plus from "./plusIcon";
 
-function Form({ todos, setTodos }) {
+function Form({ setTodos }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const value = event.target.todo.value;
+    const value = event.target.todo.value.trim();
+    if (!value) return;
 
     const newTodo = {
       title: value,
@@ -12,12 +13,9 @@ function Form({ todos, setTodos }) {
       is_completed: false,
     };
 
-    setTodos((prev) => [...prev, newTodo]);
-
-    const updatedList = JSON.stringify([...todos, newTodo]);
-    localStorage.setItem("todos", updatedList);
-
+    setTodos(prev => [...prev, newTodo]);
     event.target.reset();
+    
   }
   return (
     <form
